@@ -35,6 +35,6 @@ def scrape_imdb(url):
         
 imdblist = ['www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=1&ref_=adv_nxt',  'www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=2&ref_=adv_nxt', 'www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=3&ref_=adv_nxt']
 for url in imdblist:
-    fullurl = 'http://'+url'
+    fullurl = 'http://'+url
     print 'scraping ', fullurl
     scrape_imdb(fullurl)
