@@ -1,39 +1,40 @@
-#import our libraries
 import scraperwiki
+import urlparse
 import lxml.html
 
 # create a new function, which gets passed a variable we're going to call 'url'
-def scrape_ccg(url):
+def scrape_imdb(url):
     html = scraperwiki.scrape(url)
     print html
     root = lxml.html.fromstring(html)
     #line below selects all <div class="reveal-modal medium"> - note that because there is a space in the value of the div class, we need to use a space to indicate that
-    rows = root.cssselect("div.reveal-modal.medium") 
+    rows = root.cssselect("div.lister-item-content")
     for row in rows:
         print row
         # Set up our data record - we'll need it later
         record = {}
-        h2s = row.cssselect("h2") #grab all <h2> tags within our <div>
-        membername = h2s[0].text
-        #repeat process for <p class="lead"> 
-        leads = row.cssselect("p.lead")
-        membertitle = leads[0].text
-        #repeat process for <p>
-        ps = row.cssselect("p")
-        #this line puts the contents of the last <p tag by using [-1]
-        memberbiog = ps[-1].text_content()
+        a = row.cssselect("a") #grab all <a> tags within our <div>
+        title = a[0].text
+        #repeat process for <span class="lister-item-year text-muted unbold"> 
+        item_year = row.cssselect("span.lister-item-year.text-muted.unbold")
+        year = item_year[0].text
+        #repeat process for <span class="value">
+        value = row.cssselect("span.value")
+        rating = value[0].text
+        #repeat process for <p class="text-muted">
+        txt = row.cssselect("span.text-muted")
+        description = txt[0].txt_content()
         record['URL'] = url
-        record['Name'] = membername
-        record['Title'] = membertitle
+        record['Title'] = title
+        record['Year'] = year
+        record['Rating'] = rating
         record['Description'] = memberbiog
         print record, '------------'
         # Finally, save the record to the datastore - 'Name' is our unique key
-        scraperwiki.sqlite.save(["Name"], record)
+        scraperwiki.sqlite.save(["Title"], record)
         
-#list of URLs with similar CMS compiled with this advanced search on Google: site:nhs.uk inurl:about-us/our-governing-body.aspx
-ccglist = ['www.hounslowccg.nhs.uk/',  'www.centrallondonccg.nhs.uk/', 'www.hammersmithfulhamccg.nhs.uk/']
-#'www.ealingccg.nhs.uk/' has similar page but at different URL: http://www.hammersmithfulhamccg.nhs.uk/about-us/our-governing-body.aspx
-for ccg in ccglist:
-    fullurl = 'http://'+ccg+'about-us/our-governing-body.aspx'
+imdblist = ['www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=1&ref_=adv_nxt',  'www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=2&ref_=adv_nxt', 'www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=3&ref_=adv_nxt']
+for url in imdblist:
+    fullurl = 'http://'+url'
     print 'scraping ', fullurl
-    scrape_ccg(fullurl)
+    scrape_imdb(fullurl)
