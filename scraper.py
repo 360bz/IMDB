@@ -28,7 +28,7 @@ def scrape_imdb(url):
         record['Title'] = title
         record['Year'] = year
         record['Rating'] = rating
-        record['Description'] = memberbiog
+        record['Description'] = description
         print record, '------------'
         # Finally, save the record to the datastore - 'Name' is our unique key
         scraperwiki.sqlite.save(["Title"], record)
