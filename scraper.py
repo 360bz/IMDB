@@ -33,7 +33,7 @@ def scrape_imdb(url):
         # Finally, save the record to the datastore - 'Name' is our unique key
         scraperwiki.sqlite.save(["Title"], record)
         
-imdblist = ['www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=1&ref_=adv_nxt',  'www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=2&ref_=adv_nxt', 'www.imdb.com/search/title?count=100&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=3&ref_=adv_nxt']
+imdblist = ['www.imdb.com/search/title?count=5&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=1&ref_=adv_nxt',  'www.imdb.com/search/title?count=5&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=2&ref_=adv_nxt', 'www.imdb.com/search/title?count=5&num_votes=2500,9000000&release_date=1960,2017&title_type=feature&user_rating=8.0,10&page=3&ref_=adv_nxt']
 for url in imdblist:
     fullurl = 'http://'+url
     print 'scraping ', fullurl
