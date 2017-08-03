@@ -30,7 +30,7 @@ def scrape_imdb(url):
         #repeat process for <p class="text-muted">
         txt = row.cssselect("span.text-muted")
         description = txt[0].text_content()
-        href = row.cssselect("href")
+        href = row.cssselect("a.href")
         director = href[0].text
         #record['URL'] = url
         record['Title'] = title
