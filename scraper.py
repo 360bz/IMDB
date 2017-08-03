@@ -29,7 +29,7 @@ def scrape_imdb(url):
         genre = gen[0].text
         #repeat process for <p class="text-muted">
         txt = row.cssselect("span.text-muted")
-        description = txt[0].text_content
+        description = txt[0].text_content()
         #record['URL'] = url
         record['Title'] = title
         record['Year'] = year
