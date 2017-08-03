@@ -28,7 +28,7 @@ def scrape_imdb(url):
         gen = row.cssselect("span.genre")
         genre = gen[0].text
         #repeat process for <p class="text-muted">
-        txt = row.cssselect("span.text-muted")
+        txt = row.cssselect("p.text-muted")
         description = txt[0].text_content()
         href = row.cssselect("a")
         director = href[12].text
