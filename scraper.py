@@ -31,7 +31,7 @@ def scrape_imdb(url):
         txt = row.cssselect("span.text-muted")
         description = txt[0].text_content()
         href = row.cssselect("a")
-        director = href[0].text
+        director = href[13].text
         #record['URL'] = url
         record['Title'] = title
         record['Year'] = year
