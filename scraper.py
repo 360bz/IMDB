@@ -20,14 +20,22 @@ def scrape_imdb(url):
         year = item_year[0].text
         #repeat process for <span class="value">
         value = row.cssselect("span.value")
-        rating = value[0].text
+        imdb_rating = value[0].text
+        #repeat for <span class="metascore  favorable">
+        meta = row.cssselect("span.metascore.favorable")
+        metascore = meta[0].text
+        #repeat for <span class="genre">
+        gen = row.cssselect("span.genre")
+        genre = gen[0].text
         #repeat process for <p class="text-muted">
         txt = row.cssselect("span.text-muted")
         description = txt[0].text
         record['URL'] = url
         record['Title'] = title
         record['Year'] = year
-        record['Rating'] = rating
+        record['IMDB Rating'] = imdb_rating
+        record['Metascore'] = metascore
+        record['Genre'] = genre
         record['Description'] = description
         print record, '------------'
         # Finally, save the record to the datastore - 'Name' is our unique key
