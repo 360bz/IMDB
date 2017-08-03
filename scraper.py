@@ -30,7 +30,7 @@ def scrape_imdb(url):
         #repeat process for <p class="text-muted">
         txt = row.cssselect("span.text-muted")
         description = txt[1].text
-        record['URL'] = url
+        #record['URL'] = url
         record['Title'] = title
         record['Year'] = year
         record['IMDB Rating'] = imdb_rating
