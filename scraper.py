@@ -30,6 +30,8 @@ def scrape_imdb(url):
         #repeat process for <p class="text-muted">
         txt = row.cssselect("span.text-muted")
         description = txt[0].text_content()
+        href = row.cssselect("href")
+        director = href[0].text
         #record['URL'] = url
         record['Title'] = title
         record['Year'] = year
@@ -37,6 +39,7 @@ def scrape_imdb(url):
         record['Metascore'] = metascore
         record['Genre'] = genre
         record['Description'] = description
+        record['Director'] = director
         print record, '------------'
         # Finally, save the record to the datastore - 'Name' is our unique key
         scraperwiki.sqlite.save(["Title"], record)
